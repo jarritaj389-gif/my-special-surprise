@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Just For You 💜</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+ padding:20px;background:linear-gradient(135deg,#fff8fd,#eee2ff);
+ color:#30263a;font-family:Georgia,serif;
+}
+.page{width:100%;max-width:520px;text-align:center}
+.flower{font-size:35px;margin-bottom:5px}
+.progress{font:12px Arial;color:#a1749a;letter-spacing:2px;margin-bottom:12px}
+.card{
+ min-height:470px;background:#fff;border-radius:30px;padding:35px 28px;
+ box-shadow:0 12px 40px rgba(93,61,120,.15);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ position:relative;overflow:hidden;
+}
+.number{font:700 13px Arial;letter-spacing:3px;color:#b2779a}
+h1{font-size:30px;margin:18px 0 14px}
+p{font:16px/1.75 Arial;color:#62596a;margin:0;max-width:370px}
+.tap{
+ margin-top:30px;border:0;border-radius:40px;padding:14px 27px;
+ background:linear-gradient(135deg,#a77bd0,#8b61b7);color:white;
+ font:600 14px Arial;cursor:pointer;box-shadow:0 6px 18px #8d63bd45;
+}
+.tap:active{transform:scale(.96)}
+.dots{margin-top:18px;color:#b9a4c2;font:16px Arial}
+.dot.active{color:#8b61b7}
+.small{font:13px Arial;color:#8a7b91;margin-top:15px}
+.final{font-size:44px}
+</style>
+</head>
+<body>
+<div class="page">
+ <div class="flower">🌷</div>
+ <div class="progress" id="progress">01 / 08</div>
+
+ <div class="card" id="card">
+   <div class="number" id="number">A LITTLE THING FOR YOU</div>
+   <h1 id="title">Tum show up 💜</h1>
+   <p id="text">Pata hai tumhari ek baat mujhe bahut pasand hai? Tum bina bole bhi notice kar lete ho ki mujhe kya chahiye.</p>
+   <button class="tap" onclick="next()">TOUCH FOR NEXT ✨</button>
+ </div>
+
+ <div class="dots" id="dots">● ○ ○ ○ ○ ○ ○ ○</div>
+ <div class="small">Ek-ek karke open karna… last mein special message hai 💌</div>
+</div>
+
+<script>
+const pages=[
+ ["A LITTLE THING FOR YOU","Tum show up 💜","Pata hai tumhari ek baat mujhe bahut pasand hai? Tum bina bole bhi notice kar lete ho ki mujhe kya chahiye."],
+ ["02","Tumhari smile 🥹","Tum jab smile karte ho na, meri saari tension thodi si kam ho jaati hai. Tumhari smile genuinely meri favourite cheezon mein se ek hai."],
+ ["03","Tumhari care 🤍","Tumhari chhoti-chhoti care mujhe bahut special feel karwati hai. Shayad tumhe ye normal lage, but mere liye it means a lot."],
+ ["04","Tumhari honesty 🌷","Mujhe tumhari ye baat bahut pasand hai ki tum real ho. Jo dil mein hota hai, woh keh dete ho—and I really value that."],
+ ["05","Tumhari patience 🫶","Meri bak-bak, meri complaints, meri unnecessary fights… phir bhi tum sun lete ho. Honestly, that's pretty cute."],
+ ["06","Tumhari presence 🏡","Tumhare saath mujhe kuch prove nahi karna padta. Bas tum ho, aur somehow everything feels a little better."],
+ ["07","You're my favourite 💕","Mujhe tum perfect nahi chahiye. Mujhe bas tum chahiye—apne real, simple, funny aur thode annoying version mein bhi."],
+ ["08","LAST ONE 💌","Bas ek baat yaad rakhna… tum meri life ka koi ordinary person nahi ho. Tum woh ho jiske saath ordinary moments bhi special lagte hain."]
+];
+
+let i=0;
+function next(){
+ i++;
+ if(i>=pages.length){
+   i=pages.length-1;
+   document.getElementById("card").innerHTML=
+    '<div class="final">💜</div><div class="number">ONE LAST THING</div><h1>Bas mere saath rehna. 🥹</h1><p>Har din perfect nahi hoga, kabhi hum ladenge, kabhi manaayenge… but I hope har baar end mein hum ek dusre ke paas hi rahein.<br><br><b>Because you are my favourite person. Always. 🫶</b></p><button class="tap" onclick="location.reload()">START AGAIN 🌷</button>';
+   document.getElementById("progress").textContent="♥";
+   document.getElementById("dots").textContent="●";
+   return;
+ }
+ render();
+}
+function render(){
+ const p=pages[i];
+ document.getElementById("progress").textContent=(i+1)+" / "+pages.length;
+ document.getElementById("number").textContent=p[0];
+ document.getElementById("title").textContent=p[1];
+ document.getElementById("text").textContent=p[2];
+ document.getElementById("dots").innerHTML=pages.map((_,n)=>`<span class="dot ${n===i?'active':''}">●</span>`).join(" ");
+}
+</script>
+</body>
+</html>
